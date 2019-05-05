@@ -1,0 +1,2 @@
+setCssToHead(["wx-map{ width: ",[0,750],"; }\n.",[1],"cover-view{ width: ",[0,375],"; text-align: center; background-color: #DDDDDD; }\n.",[1],"cover-image{ position: absolute; left: ",[0,300],"; width: 96px; height: 96px; }\n",],undefined,{path:"./pages/component/cover-view/cover-view.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/component/cover-view/cover-view.wxml') } }));

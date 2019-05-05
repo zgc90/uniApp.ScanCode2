@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"btn { margin: ",[0,30]," 0; }\n",],undefined,{path:"./pages/template/fab/fab.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/template/fab/fab.wxml') } }));

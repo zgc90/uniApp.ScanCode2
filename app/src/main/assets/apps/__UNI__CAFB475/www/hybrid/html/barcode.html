@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>本地 HTML</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			.loading {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p class="loading">加载中...</p>
+		<script type="text/javascript">
+			var plusReady = function(callback) {
+				if (window.plus && window.plus.isReady) {
+					callback();
+				} else {
+					document.addEventListener('plusready', function() {
+						callback();
+					}, false);
+				}
+			};
+
+			plusReady(function() {
+				var options = {
+					barcodeId: 'barcode',
+					scanTypes: [plus.barcode.QR, plus.barcode.PDF417, plus.barcode.EAN8],
+					styles: {
+						top: 0,
+						left: 0,
+						width: window.screen.width,
+						height: window.screen.height,
+						background: '#0066FF',
+						frameColor: '#0066FF',
+						scanbarColor: '#0066FF'
+					},
+					storageKey: 'barcode_value'
+				};
+				var currentWebview = plus.webview.currentWebview();
+				var barcode = plus.barcode.create(options.barcodeId, options.scanTypes, options.styles);
+				var goBack = function() {
+					barcode.close();
+					currentWebview.close();
+				};
+
+				barcode.onmarked = function(type, code, file) {
+					plus.storage.setItem(options.storageKey, JSON.stringify({
+						code: 0,
+						result: code
+					}));
+					goBack();
+				};
+				barcode.onerror = function(error) {
+					plus.storage.setItem(options.storageKey, JSON.stringify({
+						code: 1000,
+						result: ''
+					}));
+					goBack();
+				};
+				currentWebview.append(barcode);
+				barcode.start();
+
+				plus.storage.removeItem(options.storageKey);
+
+				plus.key.addEventListener('backbutton', function() {
+					goBack();
+				});
+			});
+		</script>
+	</body>
+
+</html>

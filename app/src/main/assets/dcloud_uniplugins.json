@@ -1,0 +1,14 @@
+{
+  "nativePlugins": [
+    {
+      "hooksClass": "",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "My-ScanCode",
+          "class": "com.osmium.uniapp.scancodelibrary.ScanCodeWXModule"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.osmium.uniapp.scancodelibrary" >
+
+    <application>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Base.Theme.AppCompat"
+            ></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"uni-tab-bar-loading { text-align: center; font-size: ",[0,28],"; color: #999; }\n",],undefined,{path:"./pages/template/tabbar/tabbar.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/template/tabbar/tabbar.wxml') } }));
