@@ -11,6 +11,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.taobao.weex.bridge.JSCallback;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements Callback {
 
     private boolean hasSurface;
@@ -27,8 +30,14 @@ public class MainActivity extends AppCompatActivity implements Callback {
         super.onStart();
 
         if(backResult.equals("isFirst")){
-            new IntentIntegrator(this)
-                    .initiateScan();
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setCaptureActivity(MyCaptureActivity.class);
+//            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);  // 扫码类型
+            integrator.setPrompt("将二维码/条形码放入框内，即可自动扫描");
+            integrator.setOrientationLocked(true); //方向锁定，不可旋转
+            integrator.setBeepEnabled(true); //扫码完成的提示音
+            integrator.setBarcodeImageEnabled(false); //扫码成功时是否保存二维码图片
+            integrator.initiateScan();
         }
     }
 
@@ -46,8 +55,12 @@ public class MainActivity extends AppCompatActivity implements Callback {
         if(intentResult!=null){
             //获取扫描到的数据
             String contents = intentResult.getContents();
+            Map<String, String> map = new HashMap<>();
+            map.put("success", "true");
+            map.put("scanType", intentResult.getFormatName());
+            map.put("result", contents);
             backResult = contents;
-            myCallback.invoke(backResult);
+            myCallback.invoke(map);
             finish();
         }
     }

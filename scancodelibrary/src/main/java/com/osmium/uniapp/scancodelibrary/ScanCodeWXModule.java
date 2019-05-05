@@ -3,18 +3,29 @@ package com.osmium.uniapp.scancodelibrary;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.google.zxing.integration.android.IntentIntegrator;
+import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ScanCodeWXModule extends WXSDKEngine.DestroyableModule {
     @JSMethod(uiThread = true)
-    public void scanCode(String title, JSCallback jsCallback){
-        MainActivity.myCallback = jsCallback;
-        Intent intent = new Intent(mWXSDKInstance.getContext(), MainActivity.class);
-        ((Activity)mWXSDKInstance.getContext()).startActivityForResult(intent, 9);
+    public void scanCode(JSONObject options, JSCallback jsCallback){
+        try{
+//            String scanType = options.getString("scanType");
 
+            MainActivity.myCallback = jsCallback;
+            Intent intent = new Intent(mWXSDKInstance.getContext(), MainActivity.class);
+            ((Activity)mWXSDKInstance.getContext()).startActivityForResult(intent, 9);
+        }catch (Exception e){
+            Map<String, String> map = new HashMap<>();
+            map.put("success", "false");
+            map.put("result", e.getMessage());
+            jsCallback.invoke(map);
+        }
     }
 
 //    @Override

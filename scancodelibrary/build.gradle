@@ -42,7 +42,7 @@ dependencies {
 //    implementation "com.google.zxing:core:3.3.3"
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
-//    compileOnly 'com.alibaba:fastjson:1.2.57'
+    compileOnly 'com.alibaba:fastjson:1.2.57'
 //    implementation 'com.taobao.android:weex_sdk:0.20.0.2@aar'
 
 

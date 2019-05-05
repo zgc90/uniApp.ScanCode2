@@ -6,6 +6,12 @@
             android:name=".MainActivity"
             android:theme="@style/Base.Theme.AppCompat"
             ></activity>
+
+        <activity
+            android:name=".MyCaptureActivity"
+            android:theme="@style/Base.Theme.AppCompat"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>
