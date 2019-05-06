@@ -28,6 +28,20 @@ public class ScanCodeWXModule extends WXSDKEngine.DestroyableModule {
         }
     }
 
+    @JSMethod(uiThread = true)
+    public void scanCode(JSCallback jsCallback){
+        try{
+            MainActivity.myCallback = jsCallback;
+            Intent intent = new Intent(mWXSDKInstance.getContext(), MainActivity.class);
+            ((Activity)mWXSDKInstance.getContext()).startActivityForResult(intent, 9);
+        }catch (Exception e){
+            Map<String, String> map = new HashMap<>();
+            map.put("success", "false");
+            map.put("result", e.getMessage());
+            jsCallback.invoke(map);
+        }
+    }
+
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, Intent data){
 //        super.onActivityResult(requestCode, resultCode, data);

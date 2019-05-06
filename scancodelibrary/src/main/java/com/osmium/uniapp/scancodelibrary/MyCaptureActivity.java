@@ -2,14 +2,13 @@ package com.osmium.uniapp.scancodelibrary;
 
 import android.content.pm.PackageManager;
 import android.view.View;
-import android.widget.Button;
 
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
-public class MyCaptureActivity extends CaptureActivity {
+import java.util.Collection;
 
-    private Button switchFlashlightButton;
+public class MyCaptureActivity extends CaptureActivity {
 
     @Override
     protected DecoratedBarcodeView initializeContent() {
@@ -18,7 +17,6 @@ public class MyCaptureActivity extends CaptureActivity {
     }
 
     public void OnClick(View v){
-        System.out.print(v);
         if(R.id.ivLeft == v.getId()){
             onBackPressed();
         }

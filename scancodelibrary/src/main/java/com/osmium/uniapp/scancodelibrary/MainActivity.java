@@ -11,6 +11,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.taobao.weex.bridge.JSCallback;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         if(backResult.equals("isFirst")){
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setCaptureActivity(MyCaptureActivity.class);
-//            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);  // 扫码类型
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.PDF_417);  // 扫码类型
             integrator.setPrompt("将二维码/条形码放入框内，即可自动扫描");
             integrator.setOrientationLocked(true); //方向锁定，不可旋转
             integrator.setBeepEnabled(true); //扫码完成的提示音
@@ -55,11 +56,25 @@ public class MainActivity extends AppCompatActivity implements Callback {
         if(intentResult!=null){
             //获取扫描到的数据
             String contents = intentResult.getContents();
+            String scanType = intentResult.getFormatName();
             Map<String, String> map = new HashMap<>();
-            map.put("success", "true");
-            map.put("scanType", intentResult.getFormatName());
-            map.put("result", contents);
-            backResult = contents;
+            if(contents != null && scanType != null){
+                try{
+                    boolean ISO_8859_1 = Charset.forName("ISO-8859-1").newEncoder().canEncode(contents);
+                    if(ISO_8859_1)
+                        contents = new String(contents.getBytes("ISO-8859-1"),"UTF-8");
+                }catch (Exception e) {
+
+                }
+                map.put("success", "true");
+                map.put("scanType", scanType);
+                map.put("result", contents);
+            }else{
+                map.put("success", "false");
+                map.put("scanType", "");
+                map.put("result", "用户取消");
+            }
+            backResult = "Second";
             myCallback.invoke(map);
             finish();
         }
