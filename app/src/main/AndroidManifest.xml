@@ -57,7 +57,7 @@
         <meta-data android:name="dcloud_uninview_background"
             android:value="true"/>
 
-        <activity android:name="com.osmium.uniapp.scancodelibrary.MainActivity"></activity>
+        <activity android:name="com.osmium.uniapp.scancodelibrary.MyCaptureActivity"></activity>
     </application>
 
 </manifest>

@@ -2,10 +2,10 @@
     package="com.osmium.uniapp.scancodelibrary" >
 
     <application>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Base.Theme.AppCompat"
-            ></activity>
+        <!--<activity-->
+            <!--android:name=".MainActivity"-->
+            <!--android:theme="@style/Base.Theme.AppCompat"-->
+            <!--&gt;</activity>-->
 
         <activity
             android:name=".MyCaptureActivity"
